@@ -1,0 +1,52 @@
+[
+  {
+    "query": "SELECT e.name, d.department_name FROM employees e JOIN departments d ON e.department_id = d.id",
+    "status": "success",
+    "timestamp": "2026-09-09 00:09:37"
+  },
+  {
+    "query": "SELECT * FROM employees;",
+    "status": "success",
+    "timestamp": "2026-09-07 23:31:20"
+  },
+  {
+    "query": "WITH department_avg AS (\n    SELECT department_id, AVG(salary) as avg_salary\n    FROM employees\n    GROUP BY department_id\n)\nSELECT \n    e.name, \n    d.department_name, \n    e.salary,\n    da.avg_salary,\n    RANK() OVER (PARTITION BY e.department_id ORDER BY e.salary DESC) as rank_in_dept\nFROM employees e\nJOIN departments d ON e.department_id = d.id\nJOIN department_avg da ON e.department_id = da.department_id\nWHERE e.salary > da.avg_salary\nORDER BY d.department_name, rank_in_dept",
+    "status": "success",
+    "timestamp": "2026-09-07 23:18:34"
+  },
+  {
+    "query": "WITH department_avg AS (\n    SELECT department_id, AVG(salary) as avg_salary\n    FROM employees\n    GROUP BY department_id\n)\nSELECT \n    e.name, \n    d.department_name, \n    e.salary,\n    da.avg_salary,\n    RANK() OVER (PARTITION BY e.department_id ORDER BY e.salary DESC) as rank_in_dept\nFROM employees e\nJOIN departments d ON e.department_id = d.id\nJOIN department_avg da ON e.department_id = da.department_id\nWHERE e.salary > da.avg_salary\nORDER BY d.department_name, rank_in_dept",
+    "status": "success",
+    "timestamp": "2026-09-07 11:09:24"
+  },
+  {
+    "query": "SELECT e.name, e.department_id, e.salary,\n(SELECT AVG(salary) FROM employees e2 WHERE e2.department_id = e.department_id) as dept_avg\nFROM employees e",
+    "status": "success",
+    "timestamp": "2026-09-07 11:04:23"
+  },
+  {
+    "query": "SELECT department_id, AVG(salary) as avg_salary FROM employees GROUP BY department_id",
+    "status": "success",
+    "timestamp": "2026-09-07 11:03:41"
+  },
+  {
+    "query": "WITH department_avg AS (\n    SELECT department_id, AVG(salary) as avg_salary\n    FROM employees\n    GROUP BY department_id\n)\nSELECT \n    e.name, \n    d.department_name, \n    e.salary,\n    da.avg_salary,\n    RANK() OVER (PARTITION BY e.department_id ORDER BY e.salary DESC) as rank_in_dept\nFROM employees e\nJOIN departments d ON e.department_id = d.id\nJOIN department_avg da ON e.department_id = da.department_id\nWHERE e.salary > da.avg_salary\nORDER BY d.department_name, rank_in_dept",
+    "status": "success",
+    "timestamp": "2026-09-07 11:01:23"
+  },
+  {
+    "query": "SELECT d.department_name, COUNT(*) as employee_count, AVG(e.salary) as avg_salary\nFROM employees e\nJOIN departments d ON e.department_id = d.id\nGROUP BY d.department_name\nHAVING COUNT(*) > 2",
+    "status": "success",
+    "timestamp": "2026-09-07 10:55:58"
+  },
+  {
+    "query": "SELECT * FROM employees;",
+    "status": "success",
+    "timestamp": "2026-09-06 11:46:22"
+  },
+  {
+    "query": "SELECT * FROM employees;",
+    "status": "success",
+    "timestamp": "2026-09-06 11:46:19"
+  }
+]
